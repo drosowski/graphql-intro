@@ -1,5 +1,13 @@
 import org.jooq.meta.kotlin.*
 
+buildscript {
+    configurations["classpath"].resolutionStrategy.eachDependency {
+        if (requested.group.startsWith("org.jooq") && requested.name.startsWith("jooq")) {
+            useVersion("3.19.24")
+        }
+    }
+}
+
 plugins {
     kotlin("jvm") version "2.2.0"
     kotlin("plugin.spring") version "2.2.0"
