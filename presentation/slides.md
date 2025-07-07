@@ -43,6 +43,18 @@ src: slides/rest-vs-graphql.md
 ---
 
 ---
+src: slides/nplus1-example.md
+---
+
+---
+src: slides/nplus1.md
+---
+
+---
+src: slides/dataloader.md
+---
+
+---
 src: slides/mutation.md
 ---
 
