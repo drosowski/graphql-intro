@@ -1,0 +1,99 @@
+type Query {
+    users: [User!]!
+    user(id: ID!): User
+    projects: [Project!]!
+    project(id: ID!): Project
+    tasks: [Task!]!
+    task(id: ID!): Task
+    tasksByProject(projectId: ID!): [Task!]!
+    tasksByAssignee(assigneeId: ID!): [Task!]!
+}
+
+type Mutation {
+    createUser(input: CreateUserInput!): User!
+    updateUser(id: ID!, input: UpdateUserInput!): User
+    deleteUser(id: ID!): Boolean!
+    
+    createProject(input: CreateProjectInput!): Project!
+    updateProject(id: ID!, input: UpdateProjectInput!): Project
+    deleteProject(id: ID!): Boolean!
+    
+    createTask(input: CreateTaskInput!): Task!
+    updateTask(id: ID!, input: UpdateTaskInput!): Task
+    updateTaskStatus(id: ID!, status: TaskStatus!): Task
+    deleteTask(id: ID!): Boolean!
+}
+
+type Subscription {
+    taskUpdates: Task!
+}
+
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    tasks: [Task!]!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Project {
+    id: ID!
+    name: String!
+    description: String
+    tasks: [Task!]!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Task {
+    id: ID!
+    title: String!
+    description: String
+    status: TaskStatus!
+    project: Project!
+    assignee: User
+    createdAt: String!
+    updatedAt: String!
+}
+
+enum TaskStatus {
+    TODO
+    IN_PROGRESS
+    DONE
+}
+
+input CreateUserInput {
+    email: String!
+    name: String!
+}
+
+input UpdateUserInput {
+    email: String
+    name: String
+}
+
+input CreateProjectInput {
+    name: String!
+    description: String
+}
+
+input UpdateProjectInput {
+    name: String
+    description: String
+}
+
+input CreateTaskInput {
+    title: String!
+    description: String
+    projectId: ID!
+    assigneeId: ID
+    status: TaskStatus
+}
+
+input UpdateTaskInput {
+    title: String
+    description: String
+    assigneeId: ID
+    status: TaskStatus
+} 
